@@ -1,7 +1,7 @@
 plugins {
     kotlin("multiplatform")
     id("com.android.library")
-    id("com.squareup.sqldelight")
+    id("com.squareup.sqldelight") version "1.5.4"
 }
 
 kotlin {
@@ -64,7 +64,7 @@ kotlin {
 sqldelight {
     database("NoteDatabase") {
         packageName = "dev.kavrin.note_app_kmm.database"
-        sourceFolders = listOf("sqldeight")
+        sourceFolders = listOf("sqldelight")
     }
 }
 

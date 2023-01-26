@@ -2,10 +2,23 @@ package dev.kavrin.note_app_kmm.domain.time
 
 import kotlinx.datetime.*
 
+/**
+ * DateTimeUtil
+ *
+ * Some common time related functions
+ */
 object DateTimeUtil {
+    /**
+     * now
+     *
+     * @return [LocalDateTime] with system default time zone
+     */
     fun now(): LocalDateTime = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
 
-    fun toEpochMillis(dateTime: LocalDateTime): Long = dateTime.toInstant(TimeZone.currentSystemDefault()).toEpochMilliseconds()
+    /**
+     *
+     */
+    fun LocalDateTime.toEpochMillis(): Long = this.toInstant(TimeZone.currentSystemDefault()).toEpochMilliseconds()
 
     fun formatNoteDate(dateTime: LocalDateTime): String {
         val month = dateTime.month.name.lowercase().take(3).replaceFirstChar { it.uppercase() }
