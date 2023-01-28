@@ -24,13 +24,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
 import dev.kavrin.note_app_kmm.android.note_list.components.HideAbleSearchTextField
 import dev.kavrin.note_app_kmm.android.note_list.components.NoteItem
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun NoteListScreen(
-    viewModel: NoteListViewModel = hiltViewModel()
+    viewModel: NoteListViewModel = hiltViewModel(),
+    navController: NavHostController
 ) {
     val state by viewModel.state.collectAsState()
 
@@ -41,7 +43,9 @@ fun NoteListScreen(
     Scaffold(
         floatingActionButton = {
             FloatingActionButton(
-                onClick = {},
+                onClick = {
+                    navController.navigate(route = "note_detail/-1L")
+                },
                 backgroundColor = Color.Black
             ) {
                 Icon(
@@ -94,8 +98,8 @@ fun NoteListScreen(
                         note = note,
                         backgroundColor = Color(note.colorHex),
                         onNoteClick = {
-
-                                      },
+                            navController.navigate(route = "note_detail/${note.id}")
+                        },
                         onDeleteClick = {
                             viewModel.deleteNoteById(note.id!!)
                         },

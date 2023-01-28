@@ -7,8 +7,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.kavrin.note_app_kmm.domain.note.Note
 import dev.kavrin.note_app_kmm.domain.note.NoteDataSource
 import dev.kavrin.note_app_kmm.domain.note.SearchNotes
-import dev.kavrin.note_app_kmm.domain.time.DateTimeUtil
-import dev.kavrin.note_app_kmm.presentation.VioletHex
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
@@ -42,22 +40,6 @@ class NoteListViewModel @Inject constructor(
         started = SharingStarted.WhileSubscribed(stopTimeoutMillis = 5000),
         initialValue = NoteListState()
     )
-
-    init {
-        viewModelScope.launch {
-            repeat(10) { index ->
-                noteDataSource.insertNote(
-                    Note(
-                        id = null,
-                        title = "Title ${index + 1}",
-                        content = "Lorem ipsum dollar sit amet ${index + 1}",
-                        colorHex = VioletHex,
-                        created = DateTimeUtil.now()
-                    )
-                )
-            }
-        }
-    }
 
     fun loadNotes() {
         viewModelScope.launch {
